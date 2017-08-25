@@ -11,6 +11,8 @@ import com.nguyenthanh.phong.test1.Network.Interface.MovieApiEndPointInterface;
 import com.nguyenthanh.phong.test1.Network.Util.RetrofitUtil;
 import com.nguyenthanh.phong.test1.R;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -18,6 +20,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+
+import static org.parceler.Parcels.unwrap;
 
 public class ReadDetailActivity extends AppCompatActivity {
 
@@ -34,16 +38,7 @@ public class ReadDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if (extras == null) {
-                movieID = 0;
-            } else {
-                movieID = (int) extras.getSerializable("id");
-            }
-        } else {
-            movieID = (int) savedInstanceState.getSerializable("id");
-        }
+        movieID = Parcels.unwrap(getIntent().getParcelableExtra("id"));
 
         getMovieAt(movieID);
     }

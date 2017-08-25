@@ -14,6 +14,8 @@ import com.nguyenthanh.phong.test1.Model.Movie;
 import com.nguyenthanh.phong.test1.Model.MovieList;
 import com.nguyenthanh.phong.test1.R;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -77,7 +79,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         @OnClick(R.id.iv_avatar)
         public void readDetail() {
             Intent intent = new Intent(mContext, ReadDetailActivity.class);
-            intent.putExtra("id", mMovieList.getResults().get(getAdapterPosition()).getId());
+            intent.putExtra("id", Parcels.wrap(mMovieList.getResults().get(getAdapterPosition()).getId()));
             mContext.startActivity(intent);
         }
     }
